@@ -8,17 +8,17 @@ import model.enums.Alinhamento;
 import model.enums.Conceito;
 import model.enums.Habitat;
 import model.enums.Tamanho;
+import model.regras.Cadastro;
 
 public class menu {
     private static List<Old> bestiario = new ArrayList<>();
-    
+
     public static void main(String[] args) {
         menuTela();
     }
 
     private static void menuTela(){
         Scanner input = new Scanner(System.in);
-        
         String menuLayout = "";
         menuLayout += "========================================\n";
         menuLayout += "                    MENU\n";
@@ -43,10 +43,9 @@ public class menu {
                 System.out.println("Desligando...");
                 System.exit(0);
                 break;
-            case 1:  
-                Old m = cadastrarMonstro("Piprico");
-                bestiario.add(m);
-                System.out.printf("[%d] %s criado com sucesso.\n", m.getID(), m.getNome()); 
+            case 1:
+                bestiario.add(Cadastro.cadastrarMonstro());
+                System.out.printf("[%d] %s criado com sucesso.\n", bestiario.getFirst().getID(), bestiario.getFirst().getNome()); 
                 break;
             case 2:  
                 System.out.println("Monstro encontrado"); 
@@ -70,41 +69,18 @@ public class menu {
         }
     }
 
-    private static Old cadastrarMonstro(String nome){
-        Old monstro = new Old();
-        monstro.setId();
-        monstro.setNome(nome);
-        monstro.setConceito(Conceito.ANIMAL);
-        monstro.setHabitat(Habitat.PLANICIES);  // ← CORRETO AGORA
-        monstro.setTamanho(Tamanho.MEDIO);
-        monstro.setAlinhamento(Alinhamento.ORDEIROS);  // ← CORRETO AGORA
-        monstro.setExperiencia(35);
-        monstro.setMovimento("10m");
-        monstro.setMoral(9);
-        monstro.setArmadura(10);
-        monstro.setDadoVida("2d6");
-        monstro.setJogadaProtecao(5);
-        
-        List<String> ataques = Arrays.asList(
-            "1x Patada +2 (1d4)",
-            "CORRER: pode correr com movimento 20 durante um turno, ou 12 durante 2 turnos",
-            "CARGA: carrega até 2.500 moedas"
-        );
-        monstro.setAtaques(ataques);
-
-        return monstro;
-    }
+   
 
     private static void exibirParametrosOD(Old monstro){
         String ficha = "";
         
         ficha += "========================================\n";
-        ficha += "[" + monstro.getID() + "] " + monstro.getNome() + "- "+monstro.getExperiencia()+ "\n";
+        ficha += "[" + monstro.getID() + "] " + monstro.getNome() + " - " + monstro.getExperiencia() + " XP\n";
         ficha += "========================================\n";
         ficha += monstro.getDescricao() + "\n";
         ficha += "========================================\n";
         ficha += "DV: " + monstro.getDadoVida() + " || CA: " + monstro.getArmadura();
-        ficha += " || JP: " + monstro.getJogadaProtecao() + " || MV: " + monstro.getMovimento() + " || MO: " + monstro.getMoral() +"\n";
+        ficha += " || JP: " + monstro.getJogadaProtecao() + " || MV: " + monstro.getMovimento() + " || MO: " + monstro.getMoral() + "\n";
         ficha += "========================================\n";
         
         if (monstro.getAtaques() != null && !monstro.getAtaques().isEmpty()) {

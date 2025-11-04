@@ -14,20 +14,30 @@ public class Old implements Monstros {
     private int armadura;
     private String dadoVida;
     private int jogadaProtecao;
-    private List<String> ataques; // Mantido para uso interno, se necessário
+    private List<String> ataques; 
     private Alinhamento alinhamento;
     private Conceito conceito;
     private Habitat habitat;
     private Tamanho tamanho;
 
+    
     // Construtor
     public Old() {
         // Inicializações padrão
     }
 
     // Construtor com nome
-    public Old(String nome) {
+    public Old(String nome,int experiencia,int movimento,int moral,int armadura,int qtdDado, int nFaces, int jogadaProtecao, Alinhamento alinhamento, Conceito conceito, Habitat habitat, Tamanho tamanho) {
         this.nome = nome;
+        this.experiencia = experiencia;
+        this.movimento = movimento+"m";
+        this.moral = moral;
+        this.armadura = armadura;
+        this.dadoVida = qtdDado+"d"+nFaces;
+        this.alinhamento = alinhamento;
+        this.conceito = conceito;
+        this.habitat = habitat;
+        this.tamanho = tamanho;
     }
 
     // Implementação dos métodos da interface Monstros
@@ -38,7 +48,8 @@ public class Old implements Monstros {
 
     @Override
     public String getDescricao() {
-        return String.format("%s - %s %s que habita %s", nome, tamanho, conceito , habitat);}
+        return String.format("%s - %s %s que habita %s", nome, tamanho, conceito , habitat);
+    }
 
     // Getters e Setters
     public void setNome(String nome) {
@@ -49,6 +60,7 @@ public class Old implements Monstros {
         Random numID = new Random();
         this.id = numID.nextLong(1,9999);
     }
+
     public char getTesouro() {
         return tesouro;
     }
@@ -155,7 +167,5 @@ public class Old implements Monstros {
     public Long getID(){
         return this.id;
     }
-
-    //================================== Regras de Negócio =============================
 
 }
