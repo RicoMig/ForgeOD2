@@ -5,13 +5,16 @@ import java.util.Random;
 import model.enums.*;
 
 public class Old implements Monstros {
+    Random generate = new Random();
+
     private Long id;
     private String nome; 
     private char tesouro;
     private int experiencia;
-    private String movimento;
+    private int movimento;
     private int moral;
     private int armadura;
+    private int qtdDadoVida;
     private String dadoVida;
     private int jogadaProtecao;
     private List<String> ataques; 
@@ -27,13 +30,15 @@ public class Old implements Monstros {
     }
 
     // Construtor com nome
-    public Old(String nome,int experiencia,int movimento,int moral,int armadura,int qtdDado, int nFaces, int jogadaProtecao, Alinhamento alinhamento, Conceito conceito, Habitat habitat, Tamanho tamanho) {
+    public Old(String nome,int experiencia,int movimento,int moral,int armadura,int qtdDado, int bonus, int jogadaProtecao, Alinhamento alinhamento, Conceito conceito, Habitat habitat, Tamanho tamanho) {
+        this.id = generate.nextLong(1, 9999);
         this.nome = nome;
         this.experiencia = experiencia;
-        this.movimento = movimento+"m";
+        this.movimento = movimento;
         this.moral = moral;
         this.armadura = armadura;
-        this.dadoVida = qtdDado+"d"+nFaces;
+        this.qtdDadoVida = qtdDado;
+        this.dadoVida = qtdDadoVida+"+"+bonus;
         this.alinhamento = alinhamento;
         this.conceito = conceito;
         this.habitat = habitat;
@@ -54,6 +59,10 @@ public class Old implements Monstros {
     // Getters e Setters
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getQtdDadoVida(){
+        return qtdDadoVida;
     }
 
     public void setId(){
@@ -77,11 +86,11 @@ public class Old implements Monstros {
         this.experiencia = experiencia;
     }
 
-    public String getMovimento() {
+    public int getMovimento() {
         return movimento;
     }
 
-    public void setMovimento(String movimento) {
+    public void setMovimento(int movimento) {
         this.movimento = movimento;
     }
 

@@ -17,38 +17,76 @@ public class Cadastro {
     
     public static void main(String[] args) {
         // Teste com Pocket
-        List<Pocket> monstroPackage = new ArrayList<Pocket>();
+        List<Old> oldPackage = new ArrayList<Old>();
+        List<Pocket>pocketPackage = new ArrayList<Pocket>();
         
-        Pocket bugbear = new Pocket("bugbear", "Criatura humanóide grande e peluda", 3, 13, 9, 0);
-        Pocket drakold = new Pocket("drakold", "Dragão menor", 1, 12, 6, 0);
-        Pocket dragaoVermelho = new Pocket("Dragão Vermelho", "Dragão ancião poderoso", 5, 19, 9, 0);
-        
-        monstroPackage.add(bugbear);
-        monstroPackage.add(drakold);
-        monstroPackage.add(dragaoVermelho);
 
-        // Exibir lista de Pocket
-        System.out.println("=== MONSTROS POCKET ===");
-        monstroPackage.stream().forEach(monstro -> 
-            System.out.printf("[%d] %s || TP:%d || PV:%d || CA:%d || MV:%d || IN:%d\n", 
-                monstro.getID(),
-                monstro.getNome(),
-                monstro.getTestePersonagem(), 
-                monstro.getPontosVida(),
-                monstro.getArmadura(),
-                monstro.getMovimento(),
-                monstro.getIniciativa())
-        );
+        Old harpia = new Old("Harpia",420,6,10,15,7,0,7,Alinhamento.CAOTICOS,Conceito.HUMANOIDE_MONSTRUOSO,Habitat.FLORESTA,Tamanho.MEDIO);
 
-        // Teste com Old
-        List<Old> bestiarioOld = new ArrayList<>();
-        Old monstroOld = cadastrarMonstro();
-        bestiarioOld.add(monstroOld);
+        Old goblin = new Old("Goblin",15,6,7,11,1,-1,5,Alinhamento.CAOTICOS,Conceito.HUMANOIDE,Habitat.QUALQUER,Tamanho.PEQUENO);
+
+        Old wyvern = new Old("Wyvern",460,9,9,17,7,0,12,Alinhamento.NEUTROS,Conceito.DRAGAO,Habitat.FLORESTA,Tamanho.IMENSO);
         
-        System.out.println("\n=== MONSTRO OLD CADASTRADO ===");
-        exibirListaSimples(bestiarioOld);
+        oldPackage.add(harpia);
+        oldPackage.add(goblin);
+        oldPackage.add(wyvern);
+
+        for(Old o : oldPackage){
+            pocketPackage.add(oldTOpocket(o));
+        }
+
+        System.out.println("\n\n\n==================== Old Dragon 2nd ====================");
+        oldPackage.forEach(old -> System.out.println(old));
+        System.out.println("\n\n\n==================== Pocket Dragon ====================");
+        pocketPackage.forEach(pocket -> System.out.println(pocket));
     }
     
+    public static Old createOld(){
+
+        return new Old(
+            null,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0, 
+            null,
+            null, 
+            null,
+            null
+        );
+    }
+
+    public static Pocket createPocket(){
+        return new Pocket(
+            null, 
+            null,
+            0,
+            0, 
+            0, 
+            0
+        );
+    }
+
+    public static Pocket oldTOpocket(Old monster){
+
+        return new Pocket(
+            monster.getNome(), 
+            monster.getDescricao(),
+            monster.getQtdDadoVida()*5,
+            monster.getArmadura()-2,
+            monster.getMovimento(),
+            0
+            //caso monster.getTamanho == Tamanho.MIUDO retorna 8;
+            //caso monster.getTamanho == Tamanho.PEQUENO retorna 8;
+            //caso monster.getTamanho == Tamanho.MEDIA retorna 5;
+            //caso monster.getTamanho == Tamanho.GRANDE retorna 2;
+            //caso monster.getTamanho == Tamanho.IMENSA retorna 2;
+            //caso monster.getTamanho == Tamanho.COLOSSAL retorna 2;
+        );
+    }
     // Método para exibir lista de Old
     public static void exibirListaSimples(List<Old> monstroPackage) {
         System.out.println("📋 LISTA DE MONSTROS OLD (" + monstroPackage.size() + " monstros)");
@@ -100,7 +138,7 @@ public class Cadastro {
         monstro.setExperiencia(input.nextInt());
         
         System.out.print("Movimento (metros): ");
-        monstro.setMovimento(input.nextInt() + "m");
+        monstro.setMovimento(input.nextInt());
         
         System.out.print("Moral: ");
         monstro.setMoral(input.nextInt());

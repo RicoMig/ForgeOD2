@@ -75,4 +75,13 @@ public class Pocket implements Monstros {
     public void setMovimento(int movimento) {
         this.movimento = movimento;
     }
+
+    @Override
+    public String toString() {
+        return "Pocket [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", pontosVida=" + pontosVida
+                + ", testePersonagem=" + testePersonagem + ", armadura=" + armadura + ", movimento=" + movimento
+                + ", iniciativa=" + iniciativa + ", ataque=" + ataque + "]";
+    }
+
+    
 }
