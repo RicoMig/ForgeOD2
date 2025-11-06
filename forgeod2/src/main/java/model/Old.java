@@ -30,7 +30,7 @@ public class Old implements Monstros {
     }
 
     // Construtor com nome
-    public Old(String nome,int experiencia,int movimento,int moral,int armadura,int qtdDado, int bonus, int jogadaProtecao, Alinhamento alinhamento, Conceito conceito, Habitat habitat, Tamanho tamanho) {
+    public Old(String nome,int experiencia,int movimento,int moral,int armadura,int qtdDado, int bonus, int jogadaProtecao, int alinhamento, int conceito, int habitat, int tamanho) {
         this.id = generate.nextLong(1, 9999);
         this.nome = nome;
         this.experiencia = experiencia;
@@ -39,10 +39,10 @@ public class Old implements Monstros {
         this.armadura = armadura;
         this.qtdDadoVida = qtdDado;
         this.dadoVida = qtdDadoVida+"+"+bonus;
-        this.alinhamento = alinhamento;
-        this.conceito = conceito;
-        this.habitat = habitat;
-        this.tamanho = tamanho;
+        setAlinhamento(alinhamento);
+        setConceito(conceito);
+        setHabitat(habitat);
+        setTamanho(tamanho);
     }
 
     // Implementação dos métodos da interface Monstros
@@ -138,38 +138,84 @@ public class Old implements Monstros {
         return alinhamento;
     }
 
-    public void setAlinhamento(Alinhamento alinhamento) {
-        this.alinhamento = alinhamento;
+    public void setAlinhamento(int a) {
+        switch (a) {
+            case 1: 
+            this.alinhamento = Alinhamento.ORDEIRO;    
+            break;
+
+            case 2:
+            this.alinhamento = Alinhamento.NEUTRO;
+
+            case 3:
+            this.alinhamento = Alinhamento.CAOTICO;
+        }
+
     }
 
     public Conceito getConceito() {
         return conceito;
     }
 
-    public void setConceito(Conceito conceito) {
-        this.conceito = conceito;
+    public void setConceito(int c) {
+        switch (c) {
+            case 1: this.conceito = Conceito.HUMANOIDE;
+            case 2: this.conceito = Conceito.HUMANOIDE_MONSTRUOSO;
+            case 3: this.conceito = Conceito.GIGANTE;
+            case 4: this.conceito = Conceito.ANIMAL;
+            case 5: this.conceito = Conceito.INSETO;
+            case 6: this.conceito = Conceito.CONSTRUCTO;
+            case 7: this.conceito = Conceito.MORTO_VIVO;
+            case 8: this.conceito = Conceito.PLANTA;
+            case 9: this.conceito = Conceito.GOSMA;
+            case 10: this.conceito = Conceito.DRAGAO;
+            case 11: this.conceito = Conceito.BESTAS;
+        }
     }
 
     public Habitat getHabitat() {
         return habitat;
     }
 
-    public void setHabitat(Habitat habitat) {
-        this.habitat = habitat;
+    public void setHabitat(int h) {
+
+        switch (h) {
+            case 1: this.habitat = Habitat.QUALQUER;
+            case 2: this.habitat = Habitat.PLANICIES;
+            case 3: this.habitat = Habitat.COLINAS;
+            case 4: this.habitat = Habitat.MONTANHAS;
+            case 5: this.habitat = Habitat.PANTANOS;
+            case 6: this.habitat = Habitat.GELEIRAS;
+            case 7: this.habitat = Habitat.DESERTOS;
+            case 8: this.habitat = Habitat.FLORESTA;
+            case 9: this.habitat = Habitat.SUBTERRANEOS;
+            case 10: this.habitat = Habitat.OCEANOS;
+            case 11: this.habitat = Habitat.EXTRAPLANAR;
+        }
     }
 
     public Tamanho getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(Tamanho tamanho) {
-        this.tamanho = tamanho;
+    public void setTamanho(int t) {
+        
+        
+        switch (t) {
+            case 1: this.tamanho = Tamanho.MIUDO;
+            case 2: this.tamanho = Tamanho.PEQUENO;
+            case 3: this.tamanho = Tamanho.MEDIO;
+            case 4: this.tamanho = Tamanho.GRANDE;
+            case 5: this.tamanho = Tamanho.IMENSO;
+            case 6: this.tamanho = Tamanho.COLOSSAL;
+           
+        }
     }
 
     // Método toString para exibição
     @Override
     public String toString() {
-        return getDescricao();
+        return "["+id+"] "+ nome +" {"+tamanho+ ", "+habitat+", " +qtdDadoVida+"}";
     } 
 
     @Override

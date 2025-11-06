@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 import java.util.Random;
+import model.enums.Tamanho;
 
 public class Pocket implements Monstros {
     private static Random generate = new Random();
@@ -15,20 +16,19 @@ public class Pocket implements Monstros {
     private int iniciativa;
     private List<String> ataque;
 
-    public Pocket(String nome, String descricao, int testePersonagem, int armadura, int movimento, int iniciativa) {
-        this.id = generate.nextLong(1, 9999);
+    public Pocket(Long id, String nome, String descricao, int testePersonagem, int armadura, int movimento, Tamanho tamanho) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.testePersonagem = testePersonagem;
         this.pontosVida = testePersonagem * 5;
         this.armadura = armadura;
         this.movimento = movimento;
-        this.iniciativa = iniciativa;
+        setIniciativa(tamanho);
     }
 
-    // 🔥 IMPLEMENTAÇÃO OBRIGATÓRIA da interface Monstros
     @Override
-    public Long getID() {  // ← Note: getID() com D maiúsculo
+    public Long getID() {
         return this.id;
     }
 
@@ -42,7 +42,6 @@ public class Pocket implements Monstros {
         return descricao;
     }
 
-    // Seus outros getters (não fazem parte da interface)
     public int getPontosVida() {
         return pontosVida;
     }
@@ -67,7 +66,6 @@ public class Pocket implements Monstros {
         return ataque;
     }
 
-    // Setters se necessário
     public void setAtaque(List<String> ataque) {
         this.ataque = ataque;
     }
@@ -76,12 +74,32 @@ public class Pocket implements Monstros {
         this.movimento = movimento;
     }
 
-    @Override
-    public String toString() {
-        return "Pocket [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", pontosVida=" + pontosVida
-                + ", testePersonagem=" + testePersonagem + ", armadura=" + armadura + ", movimento=" + movimento
-                + ", iniciativa=" + iniciativa + ", ataque=" + ataque + "]";
+    public void setIniciativa(Tamanho tamanho) {
+        if (tamanho == null) {
+            this.iniciativa = 0;
+            return;
+        }
+        
+        switch (tamanho) {
+            case MIUDO:
+            case PEQUENO:
+                this.iniciativa = 8;
+                break;
+            case MEDIO:
+                this.iniciativa = 5;
+                break;
+            case GRANDE:
+            case IMENSO:
+            case COLOSSAL:
+                this.iniciativa = 2;
+                break;
+            default:
+                this.iniciativa = 0;
+        }
     }
 
-    
+    @Override
+    public String toString() {
+        return "[" + id + "] " + nome + " {" + pontosVida + ", " + testePersonagem + ", " + movimento + ", " + armadura + ", " + iniciativa + "}";
+    }
 }

@@ -44,7 +44,7 @@ public class menu {
                 System.exit(0);
                 break;
             case 1:
-                bestiario.add(Cadastro.cadastrarMonstro());
+                bestiario.add(Cadastro.createMonster());
                 System.out.printf("[%d] %s criado com sucesso.\n", bestiario.getFirst().getID(), bestiario.getFirst().getNome()); 
                 break;
             case 2:  
@@ -52,13 +52,17 @@ public class menu {
                 break;
             case 3:  
                 if (!bestiario.isEmpty()) {
-                    exibirParametrosOD(bestiario.get(0));
+                    bestiario.forEach(old -> System.out.println(old));
                 } else {
                     System.out.println("Nenhum monstro criado ainda!");
                 }
                 break;
             case 4:  
-                System.out.println("Parametros do monstro no Pocket Dragon"); 
+                if (!bestiario.isEmpty()) {
+                    bestiario.forEach(old -> System.out.println(Cadastro.convetToPocket(old)));
+                } else {
+                    System.out.println("Nenhum monstro criado ainda!");
+                }
                 break;
             case 5:  
                 System.out.println("Monstro excluido"); 
