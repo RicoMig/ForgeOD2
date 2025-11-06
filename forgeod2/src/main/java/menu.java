@@ -8,7 +8,7 @@ import model.enums.Alinhamento;
 import model.enums.Conceito;
 import model.enums.Habitat;
 import model.enums.Tamanho;
-import model.regras.Cadastro;
+import model.regras.CrudMonster;
 
 public class menu {
     private static List<Old> bestiario = new ArrayList<>();
@@ -44,11 +44,11 @@ public class menu {
                 System.exit(0);
                 break;
             case 1:
-                bestiario.add(Cadastro.createMonster());
+                bestiario.add(CrudMonster.createMonster());
                 System.out.printf("[%d] %s criado com sucesso.\n", bestiario.getFirst().getID(), bestiario.getFirst().getNome()); 
                 break;
             case 2:  
-                System.out.println("Monstro encontrado"); 
+                System.out.println(CrudMonster.finderMonster(bestiario).monstroWindow());
                 break;
             case 3:  
                 if (!bestiario.isEmpty()) {
@@ -59,7 +59,7 @@ public class menu {
                 break;
             case 4:  
                 if (!bestiario.isEmpty()) {
-                    bestiario.forEach(old -> System.out.println(Cadastro.convetToPocket(old)));
+                    bestiario.forEach(old -> System.out.println(CrudMonster.convetToPocket(old).viewWindow()));
                 } else {
                     System.out.println("Nenhum monstro criado ainda!");
                 }
@@ -73,28 +73,4 @@ public class menu {
         }
     }
 
-   
-
-    private static void exibirParametrosOD(Old monstro){
-        String ficha = "";
-        
-        ficha += "========================================\n";
-        ficha += "[" + monstro.getID() + "] " + monstro.getNome() + " - " + monstro.getExperiencia() + " XP\n";
-        ficha += "========================================\n";
-        ficha += monstro.getDescricao() + "\n";
-        ficha += "========================================\n";
-        ficha += "DV: " + monstro.getDadoVida() + " || CA: " + monstro.getArmadura();
-        ficha += " || JP: " + monstro.getJogadaProtecao() + " || MV: " + monstro.getMovimento() + " || MO: " + monstro.getMoral() + "\n";
-        ficha += "========================================\n";
-        
-        if (monstro.getAtaques() != null && !monstro.getAtaques().isEmpty()) {
-            ficha += "Ataques:\n";
-            for (String ataque : monstro.getAtaques()) {
-                ficha += "- " + ataque + "\n";
-            }
-            ficha += "========================================\n";
-        }
-
-        System.out.println(ficha);
-    }
 }
