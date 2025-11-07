@@ -31,7 +31,7 @@ public class Ataque {
 
     @Override
     public String toString() {
-        return "["+id+"] "+numeroAtaques+"x "+tipoAtaque+"+"+bonusAtaque+" ("+DanoBase+"+"+bonusDano+"+"+efeitoDano+")";
+        return numeroAtaques+"x "+tipoAtaque+"+"+bonusAtaque+" ("+DanoBase+"+"+bonusDano+"+"+efeitoDano+")";
     }
 
     
